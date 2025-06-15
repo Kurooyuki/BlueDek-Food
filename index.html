@@ -9,29 +9,16 @@
 <body>
   <header>
     <div class="logo-title">
-  <img src="bluedeklogo.png" alt="Logo BlueDek" class="logo-img">
-  <h1>BlueDek<br>Food</h1>
-</div>
+      <img src="bluedeklogo.png" alt="Logo BlueDek" class="logo-img">
+      <h1>BlueDek<br>Food</h1>
+    </div>
     <nav>
       <button onclick="navigate('home')">Home</button>
       <button onclick="navigate('menu')">Menu</button>
       <button onclick="navigate('cart')" style="position: relative;">
-  Keranjang
-  <span id="nav-cart-badge"
-        style="
-          display: none;
-          position: absolute;
-          top: -5px;
-          right: -5px;
-          background: red;
-          color: white;
-          font-size: 12px;
-          padding: 2px 6px;
-          border-radius: 50%;
-        ">
-    0
-  </span>
-</button>
+        Keranjang
+        <span id="nav-cart-badge" style="display: none; position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 12px; padding: 2px 6px; border-radius: 50%;">0</span>
+      </button>
     </nav>
   </header>
 
@@ -64,40 +51,59 @@
           <button onclick="addToCart('Nasi Goreng', 20000)">Pesan</button>
         </div>
         <div class="card">
-          <img src="bakso.jpg" alt="Bakso" class="menu-imgg">
+          <img src="bakso.jpg" alt="Bakso" class="menu-img">
           <h3>Bakso</h3>
           <p>Rp 100.000</p>
           <button onclick="addToCart('Bakso', 100000)">Pesan</button>
         </div>
+        <div class="card">
+          <img src="lalapan.jpeg" alt="Lalapan" class="menu-img">
+          <h3>Lalapan</h3>
+          <p>Rp 100.000</p>
+          <button onclick="addToCart('Lalapan', 100000)">Pesan</button>
+        </div>
+        <div class="card">
+  <img src="mieayam.jpg" alt="Mie Ayam" class="menu-img">
+  <h3>Mie Ayam</h3>
+  <p>Rp 20.000</p>
+  <button onclick="addToCart('Mie Ayam ', 20000)">Pesan</button>
+</div>
+<div class="card">
+  <img src="ayambetutu.jpg" alt="Ayam Betutu" class="menu-img">
+  <h3>Ayam Betutu</h3>
+  <p>Rp 200.000</p>
+  <button onclick="addToCart('Ayam Betutu ', 200000)">Pesan</button>
+</div>
       </div>
     </section>
 
     <section id="cart">
- <h2>Keranjang Kamu</h2>
-  <ul id="cart-list"></ul>
+      <h2>Keranjang Kamu</h2>
+      <ul id="cart-list"></ul>
 
-  <div class="voucher-section">
-    <label for="voucher">Kode Voucher:</label><br />
-    <input type="text" id="voucher" placeholder="Masukkan kode...">
-    <button onclick="applyVoucher()">Gunakan Voucher</button>
-  </div>
+      <div class="voucher-section">
+        <label for="voucher">Kode Voucher:</label><br />
+        <input type="text" id="voucher" placeholder="Masukkan kode...">
+        <button onclick="applyVoucher()">Gunakan Voucher</button>
+      </div>
 
-  <div class="user-info">
-    <h3>Data Pemesan</h3>
-    <input type="text" id="customer-name" placeholder="Nama lengkap"><br><br>
-    <input type="text" id="customer-address" placeholder="Alamat lengkap"><br><br>
-    <input type="tel" id="customer-phone" placeholder="Nomor HP"><br>
-    <label for="metode-pembayaran">Metode Pembayaran:</label>
-<select id="metode-pembayaran">
-  <option value="transfer">Transfer Bank (Comming Soon)</option>
-  <option value="cod">COD (Bayar di Tempat)</option>
-  <option value="ewallet">E-Wallet(Comming Soon)</option>
-</select>
-  </div>
-<p>Total: <strong>Rp. <span id="total">0</span></strong></p>
-<button class="order-btn" onclick="placeOrder()">Order Sekarang</button>
-</section>
-  </div>
+      <div class="user-info">
+        <h3>Data Pemesan</h3>
+        <input type="text" id="customer-name" placeholder="Nama lengkap"><br><br>
+        <input type="text" id="customer-address" placeholder="Alamat lengkap"><br><br>
+        <input type="tel" id="customer-phone" placeholder="Nomor HP"><br>
+        <label for="metode-pembayaran">Metode Pembayaran:</label>
+        <select id="metode-pembayaran">
+          <option value="transfer">Transfer Bank (Coming Soon)</option>
+          <option value="cod">COD (Bayar di Tempat)</option>
+          <option value="ewallet">E-Wallet (Coming Soon)</option>
+        </select>
+        <div id="info-pembayaran" style="margin-top: 10px;"></div>
+      </div>
+
+      <p>Total: <strong>Rp. <span id="total">0</span></strong></p>
+      <button class="order-btn" onclick="placeOrder()">Order Sekarang</button>
+    </section>
   </main>
 
   <footer>
