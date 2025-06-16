@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+<head
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlueDek Food</title>
@@ -21,16 +21,18 @@
       </button>
     </nav>
   </header>
+  <button onclick="toggleDarkMode()" id="dark-mode-btn">🌙 Dark Mode</button>
+  <button onclick="toggleLanguage()" id="language-btn">🇮🇩 Bahasa</button>
 
   <main>
     <section id="home" class="active">
-      <h2>Selamat Datang di BlueDek Food</h2>
-      <p>Pesan makanan favoritmu cepat dan aman!</p>
-      <p>Untuk Memesan Makanan Pencet Tombol Menu.</p>
+      <h2 id="judul-home">>Selamat Datang di BlueDek Food</h2>
+      <p id="deskripsi-home">Pesan makanan favoritmu cepat dan aman!</p>
+      <p id="deskripsi-homee">Untuk Memesan Makanan Pencet Tombol Menu.</p>
     </section>
 
     <section id="menu">
-      <h2>Menu Kami</h2>
+      <h2 id="judul-menu">Menu Kami</h2>
       <div class="menu-grid">
         <div class="card">
           <img src="ayam.jpg" alt="Ayam Bakar" class="menu-img">
@@ -78,21 +80,21 @@
     </section>
 
     <section id="cart">
-      <h2>Keranjang Kamu</h2>
+      <h2 id=judul-cart>Keranjang Kamu</h2>
       <ul id="cart-list"></ul>
 
       <div class="voucher-section">
-        <label for="voucher">Kode Voucher:</label><br />
+        <label for="voucher" id="label-voucher">Kode Voucher:</label><br />
         <input type="text" id="voucher" placeholder="Masukkan kode...">
         <button onclick="applyVoucher()">Gunakan Voucher</button>
       </div>
 
       <div class="user-info">
         <h3>Data Pemesan</h3>
-        <input type="text" id="customer-name" placeholder="Nama lengkap"><br><br>
-        <input type="text" id="customer-address" placeholder="Alamat lengkap"><br><br>
-        <input type="tel" id="customer-phone" placeholder="Nomor HP"><br>
-        <label for="metode-pembayaran">Metode Pembayaran:</label>
+        <input type="text" id="customer-name" placeholder="Full Name"><br><br>
+        <input type="text" id="customer-address" placeholder="Full Address"><br><br>
+        <input type="tel" id="customer-phone" placeholder="Phone Number"><br>
+        <label for="metode-pembayaran">Payment Method:</label>
         <select id="metode-pembayaran">
           <option value="transfer">Transfer Bank (Coming Soon)</option>
           <option value="cod">COD (Bayar di Tempat)</option>
@@ -100,9 +102,9 @@
         </select>
         <div id="info-pembayaran" style="margin-top: 10px;"></div>
       </div>
-
+<p id="estimasi-pengantaran" style="font-style: italic; color: #0077cc;"></p>
       <p>Total: <strong>Rp. <span id="total">0</span></strong></p>
-      <button class="order-btn" onclick="placeOrder()">Order Sekarang</button>
+      <button class="order-btn" onclick="placeOrder()" >Order Sekarang</button>
     </section>
   </main>
 
