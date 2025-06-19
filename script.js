@@ -141,7 +141,7 @@ function toggleLanguage() {
     document.querySelector(".order-btn").textContent = "Place Order";
   } else {
     currentLanguage = "id";
-    langBtn.textContent = "🇮🇩 Bahasa";
+    langBtn.textContent = "🇮🇩 Indonesia";
 
     // Ubah kembali ke Indonesia
     document.getElementById("judul-home").textContent = "Selamat Datang di BlueDek Food";
