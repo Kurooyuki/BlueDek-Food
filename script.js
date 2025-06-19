@@ -4,6 +4,8 @@ let voucherDiscount = 0;
 const validVouchers = {
   "BELANJAHEMAT": 100000,
   "GITHUB": 100000,
+"  ": lol,
+  "HOSTEDBYGITHUB": 100000000,
 };
 
 function navigate(page) {
