@@ -4,9 +4,6 @@ let voucherDiscount = 0;
 const validVouchers = {
   "BELANJAHEMAT": 100000,
   "GITHUB": 100000,
-"MASUKKAN KODE...": lol,
-  "HOSTEDBYGITHUB": 100000000,
-"Massukan kode...": lol,
 };
 
 function navigate(page) {
