@@ -4,6 +4,7 @@ let voucherDiscount = 0;
 const validVouchers = {
   "BELANJAHEMAT": 100000,
   "GITHUB": 100000,
+  "2025BLUEDEK": 10000,
 };
 
 function navigate(page) {
