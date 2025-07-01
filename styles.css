@@ -1,5 +1,10 @@
-body {
-  font-family: Arial, sans-serif;
+/* Gunakan Fredoka One untuk judul */
+h1, h2, h3, .logo-title, .logo-img, a{
+  font-family: 'Fredoka One', cursive;
+}
+/* Gunakan Poppins untuk teks lainnya */
+body, input, select, label {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   background-color: #e0f0ff;
   color: #003366;
@@ -60,7 +65,6 @@ section.active {
   border-radius: 5px;
   cursor: pointer;
 }
-
 footer {
   text-align: center;
   background-color: #003366;
@@ -110,6 +114,11 @@ footer {
 .logo-img {
   width: 100px;
   height: 100px;
+  object-fit: contain;
+}
+.logo-imgg {
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 .menu-item {
