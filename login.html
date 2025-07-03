@@ -91,6 +91,7 @@
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="login()">Masuk</button>
+    
     <div class="error" id="errorMsg"></div>
     <div class="link">
       Belum punya akun? <a href="register.html">Daftar di sini</a>
@@ -98,27 +99,38 @@
   </div>
 
   <script>
-    function login() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const errorMsg = document.getElementById("errorMsg");
+function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const errorMsg = document.getElementById("errorMsg");
 
-      const stored = JSON.parse(localStorage.getItem("userAccount"));
+  const stored = JSON.parse(localStorage.getItem("userAccount"));
 
-      if (!email || !password) {
-        errorMsg.textContent = "Email dan password harus diisi.";
-        return;
-      }
+  if (!email || !password) {
+    errorMsg.textContent = "Email dan password harus diisi.";
+    return;
+  }
 
-      if (!stored || stored.email !== email || stored.password !== password) {
-        errorMsg.textContent = "Email atau password salah!";
-        return;
-      }
+  // Pindahkan validasi domain ke sini
+  if (
+    !email.endsWith("@gmail.com") &&
+    !email.endsWith("@yahoo.com") &&
+    !email.includes("@outlook.") &&
+    !email.endsWith("@hotmail.com")
+  ) {
+    errorMsg.textContent = "Domain email tidak didukung.";
+    return;
+  }
 
-      // Simpan status login dan alihkan ke index.html
-      localStorage.setItem("isLoggedIn", "true");
-      window.location.href = "index.html";
-    }
+  if (!stored || stored.email !== email || stored.password !== password) {
+    errorMsg.textContent = "Email atau password salah!";
+    return;
+  }
+
+  // Simpan status login dan alihkan ke index.html
+  localStorage.setItem("isLoggedIn", "true");
+  window.location.href = "index.html";
+}
   </script>
 
 </body>

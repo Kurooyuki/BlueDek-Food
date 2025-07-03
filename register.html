@@ -57,7 +57,7 @@
     }
 
     button:hover {
-      background: #3BB143;
+      background: #2e9136;
     }
 
     .error {
@@ -83,13 +83,19 @@
 </head>
 <body>
 
-  <!-- Logo dipindahkan ke sini -->
-  <img src="https://media.discordapp.net/attachments/1384113430612672535/1389412479393726515/20250701_090859.png?ex=686729b5&is=6865d835&hm=dc7f7ca0528584dd02c98928e0907860bc492066aeddc6bf0630a3385e21f1ef&" alt="Logo BlueDek" class="logo-img">
+  <img src="https://media.discordapp.net/attachments/1384113430612672535/1389412479393726515/20250701_090859.png" alt="Logo BlueDek" class="logo-img">
  
   <div class="form-box">
     <h2>Daftar</h2>
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Password (minimal 8 karakter)" required>
+
+    <!-- CAPTCHA -->
+    <div id="captcha-box">
+      <p id="captcha-question"></p>
+      <input type="text" id="captcha-answer" placeholder="Jawaban captcha" required>
+    </div>
+
     <button onclick="register()">Daftar</button>
     <div class="error" id="errorMsg"></div>
     <div class="link">
@@ -98,18 +104,35 @@
   </div>
 
   <script>
+    let captchaResult = 0;
+
+    function generateCaptcha() {
+      const a = Math.floor(Math.random() * 10) + 1;
+      const b = Math.floor(Math.random() * 10) + 1;
+      captchaResult = a + b;
+      document.getElementById("captcha-question").textContent = `Berapa ${a} + ${b}?`;
+    }
+
+    document.addEventListener("DOMContentLoaded", generateCaptcha);
+
     function isWeakPassword(pwd) {
       const weak = ["12345678", "87654321"];
       return pwd.length < 8 || weak.includes(pwd);
     }
 
-    function isGmail(email) {
-      return email.endsWith("@gmail.com");
+    function isAllowedEmail(email) {
+      return (
+        email.endsWith("@gmail.com") ||
+        email.endsWith("@yahoo.com") ||
+        email.includes("@outlook.") ||
+        email.endsWith("@hotmail.com")
+      );
     }
 
     function register() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
+      const userAnswer = parseInt(document.getElementById("captcha-answer").value);
       const errorMsg = document.getElementById("errorMsg");
 
       if (!email || !password) {
@@ -117,8 +140,8 @@
         return;
       }
 
-      if (!isGmail(email)) {
-        errorMsg.textContent = "Email harus menggunakan @gmail.com";
+      if (!isAllowedEmail(email)) {
+        errorMsg.textContent = "Email harus dari Gmail, Yahoo, Outlook, atau Hotmail.";
         return;
       }
 
@@ -127,10 +150,15 @@
         return;
       }
 
+      if (userAnswer !== captchaResult) {
+        errorMsg.textContent = "Captcha salah. Coba lagi.";
+        generateCaptcha();
+        return;
+      }
+
       const userAccount = { email, password };
       localStorage.setItem("userAccount", JSON.stringify(userAccount));
 
-      // Arahkan ke login setelah berhasil daftar
       window.location.href = "login.html";
     }
   </script>
