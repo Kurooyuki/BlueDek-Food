@@ -92,8 +92,9 @@
       return;
     }
 
-    // Login berhasil, alihkan ke index.html
-    window.location.href = "index.html";
+// Login berhasil, simpan status login lalu alihkan
+   localStorage.setItem("isLoggedIn", "true");
+  window.location.href = "index.html";
   }
 </script>
 

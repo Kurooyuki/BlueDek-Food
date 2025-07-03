@@ -169,5 +169,23 @@ function searchMenu() {
     }
   });
 }
-  
+  // Sembunyikan tombol Register/Login jika sudah login
+document.addEventListener("DOMContentLoaded", () => {
+  const loginLink = document.querySelector('a[href="login.html"]');
+  if (loginLink && localStorage.getItem("isLoggedIn") === "true") {
+    loginLink.style.display = "none";
+  }
+});
+function logout() {
+  localStorage.removeItem("isLoggedIn");
+  window.location.reload();
+}
+
+// Tampilkan tombol logout jika user login
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logout-btn");
+  if (logoutBtn && localStorage.getItem("isLoggedIn") === "true") {
+    logoutBtn.style.display = "inline-block";
+  }
+});
   
