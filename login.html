@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Akun</title>
+  <img src="https://cdn.discordapp.com/attachments/1384113430612672535/1389412479393726515/20250701_090859.png?ex=686486b5&is=68633535&hm=8a10f3708b6ab447ab9d4ecb776dc75beb1a4fbc88a86e98d89be34f3420f95d&" alt="Logo BlueDek" class="logo-img">
+  <style>
+  .logo-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #2196F3;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1976D2;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button onclick="login()">Masuk</button>
+  <div class="error" id="errorMsg"></div>
+  <div class="link">
+    Belum punya akun? <a href="register.html">Daftar di sini</a>
+  </div>
+</div>
+
+<script>
+  function login() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const errorMsg = document.getElementById("errorMsg");
+
+    const stored = JSON.parse(localStorage.getItem("userAccount"));
+
+    if (!email || !password) {
+      errorMsg.textContent = "Email dan password harus diisi.";
+      return;
+    }
+
+    if (!stored || stored.email !== email || stored.password !== password) {
+      errorMsg.textContent = "Email atau password salah!";
+      return;
+    }
+
+    // Login berhasil, alihkan ke index.html
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

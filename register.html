@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Akun</title>
+  <img src="https://cdn.discordapp.com/attachments/1384113430612672535/1389412479393726515/20250701_090859.png?ex=686486b5&is=68633535&hm=8a10f3708b6ab447ab9d4ecb776dc75beb1a4fbc88a86e98d89be34f3420f95d&" alt="Logo BlueDek" class="logo-img">
+ 
+  <style>
+   .logo-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #388E3C;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <h2>Daftar</h2>
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password (minimal 8 karakter)" required>
+  <button onclick="register()">Daftar</button>
+  <div class="error" id="errorMsg"></div>
+  <div class="link">
+    Sudah punya akun?
+    <div>
+    <a href="login.html">Login di sini</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function isWeakPassword(pwd) {
+    const weak = ["12345678", "87654321"];
+    return pwd.length < 8 || weak.includes(pwd);
+  }
+
+  function isGmail(email) {
+    return email.endsWith("@gmail.com",);
+  }
+
+  function register() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const errorMsg = document.getElementById("errorMsg");
+
+    if (!email || !password) {
+      errorMsg.textContent = "Email dan password harus diisi.";
+      return;
+    }
+
+    if (!isGmail(email)) {
+      errorMsg.textContent = "Email harus menggunakan @gmail.com";
+      return;
+    }
+
+    if (isWeakPassword(password)) {
+      errorMsg.textContent = "Password terlalu lemah atau kurang dari 8 karakter.";
+      return;
+    }
+
+    const userAccount = { email, password };
+    localStorage.setItem("userAccount", JSON.stringify(userAccount));
+
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

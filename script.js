@@ -156,6 +156,18 @@ function toggleLanguage() {
     document.querySelector(".order-btn").textContent = "Order Sekarang";
   }
 }
+function searchMenu() {
+  const keyword = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".menu-grid .card");
 
+  cards.forEach(card => {
+    const name = card.getAttribute("data-name");
+    if (name.includes(keyword)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
   
   
