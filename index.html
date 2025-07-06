@@ -6,21 +6,22 @@
   <title>BlueDek Food</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1384113430612672535/1389412479393726515/20250701_090859.png?ex=686486b5&is=68633535&hm=8a10f3708b6ab447ab9d4ecb776dc75beb1a4fbc88a86e98d89be34f3420f95d&">
+<link rel="icon" type="image/png" href="bludek.png">
 </head>
 <body>
   <header>
     <div class="logo-title">
-      <img src="https://cdn.discordapp.com/attachments/1384113430612672535/1389412479393726515/20250701_090859.png?ex=686486b5&is=68633535&hm=8a10f3708b6ab447ab9d4ecb776dc75beb1a4fbc88a86e98d89be34f3420f95d&" alt="Logo BlueDek" class="logo-img">
+      <img src="bludek.png" alt="Logo BlueDek" class="logo-img">
       <h1>BlueDek<br>Food</h1>
     </div>
     <nav>
       <button onclick="navigate('home')">Home</button>
       <button onclick="navigate('menu')">Menu</button>
-      <button onclick="navigate('cart')" style="position: relative;">
+      <button onclick="navigate('cart')" style="position: relative;" id="but-ton">
         Keranjang
         <span id="nav-cart-badge" style="display: none; position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 12px; padding: 2px 6px; border-radius: 50%;">0</span>
       </button>
+      <button onclick="navigate('feedback')">Feedback</button>
     </nav>
   </header>
   <button onclick="toggleDarkMode()" id="dark-mode-btn">🌙 Dark Mode</button>
@@ -32,9 +33,12 @@
       <p id="deskripsi-home">Pesan makanan favoritmu cepat dan aman!</p>
       <p id="deskripsi-homee">Untuk Memesan Makanan Pencet Tombol Menu.</p>
       <a href="login.html">Register/Login</a>
-      <button onclick="logout()" id="logout-btn" style="display:none;">Logout</button>
+      <button onclick="showLogoutPopup()" id="logout-btn" style="display: none;">
+  Logout
+  <button onclick="cekKota()">📍 Cek Kota Asal Saya</button>
+<p id="lokasi-output"></p>
+</button>
     </section>
-
     <section id="menu">
       <h2 id="judul-menu">Menu Kami</h2>
       <div class="menu-grid">
@@ -42,7 +46,7 @@
           <img src="ayam.jpg" alt="Ayam Bakar" class="menu-img">
           <h3>Ayam Bakar</h3>
           <p>Rp 250.000</p>
-          <button onclick="addToCart('Ayam Bakar', 250000)">Pesan</button>
+          <button onclick="addToCart('Ayam Bakar', 250000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>⭐⭐⭐⭐⭐</p>
@@ -53,7 +57,7 @@
           <img src="pizza.jpg" alt="Pizza" class="menu-img">
           <h3>Pizza Large</h3>
           <p>Rp 350.000</p>
-          <button onclick="addToCart('Pizza Large', 350000)">Pesan</button>
+          <button onclick="addToCart('Pizza Large', 350000)" id="order-barang1">Pesan</button>
           <div class="review">
     <p>⭐⭐⭐⭐⭐</p>
 </div>
@@ -62,7 +66,7 @@
           <img src="nasgor.jpg" alt="Nasi Goreng" class="menu-img">
           <h3>Nasi Goreng Spesial</h3>
           <p>Rp 20.000</p>
-          <button onclick="addToCart('Nasi Goreng', 20000)">Pesan</button>
+          <button onclick="addToCart('Nasi Goreng', 20000)" id="pesan-barang">Pesan</button>
           <div class="review">
     <p>‎🩶 No Review!</p>
   </div>
@@ -72,7 +76,7 @@
           <img src="bakso.jpg" alt="Bakso" class="menu-img">
           <h3>Bakso</h3>
           <p>Rp 100.000</p>
-          <button onclick="addToCart('Bakso', 100000)">Pesan</button>
+          <button onclick="addToCart('Bakso', 100000)" id="pesan-barang">Pesan</button>
           <div class="review">
     <p>‎🩶 No Review!</p>
   </div>
@@ -82,7 +86,7 @@
           <img src="lalapan.jpeg" alt="Lalapan" class="menu-img">
           <h3>Lalapan</h3>
           <p>Rp 100.000</p>
-          <button onclick="addToCart('Lalapan', 100000)">Pesan</button>
+          <button onclick="addToCart('Lalapan', 100000)" id="pesan-barang">Pesan</button>
           <div class="review">
     <p>‎🩶 No Review!</p>
   </div>
@@ -92,7 +96,7 @@
   <img src="mieayam.jpg" alt="Mie Ayam" class="menu-img">
   <h3>Mie Ayam</h3>
   <p>Rp 20.000</p>
-  <button onclick="addToCart('Mie Ayam ', 20000)">Pesan</button>
+  <button onclick="addToCart('Mie Ayam ', 20000)" id="pesan-barang">Pesan</button>
   <div class="review">
     <p>‎🩶 No Review!</p>
   </div>
@@ -102,7 +106,7 @@
   <img src="ayambetutu.jpg" alt="Ayam Betutu" class="menu-img">
   <h3>Ayam Betutu</h3>
   <p>Rp 200.000</p>
-  <button onclick="addToCart('Ayam Betutu ', 200000)">Pesan</button>
+  <button onclick="addToCart('Ayam Betutu ', 200000)" id="pesan-barang">Pesan</button>
   <div class="review">
     <p>‎🩶 No Review!</p>
   </div>
@@ -113,7 +117,7 @@
           <img src="gadogado.jpg" alt="Gado Gado" class="menu-img">
           <h3>Gado Gado</h3>
           <p>Rp 20.000</p>
-          <button onclick="addToCart('Gado Gado', 20000)">Pesan</button>
+          <button onclick="addToCart('Gado Gado', 20000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -123,7 +127,7 @@
           <img src="rendang.jpg" alt="Rendang" class="menu-img">
           <h3>Rendang</h3>
           <p>Rp 35.000</p>
-          <button onclick="addToCart('Rendang', 35000)">Pesan</button>
+          <button onclick="addToCart('Rendang', 35000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -133,7 +137,7 @@
           <img src="nasiuduk.jpg" alt="Nasi Uduk" class="menu-img">
           <h3>Nasi Uduk</h3>
           <p>Rp 15.000</p>
-          <button onclick="addToCart('Nasi Uduk', 15000)">Pesan</button>
+          <button onclick="addToCart('Nasi Uduk', 15000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -143,7 +147,7 @@
           <img src="pempek.jpg" alt="Pempek" class="menu-img">
           <h3>Pempek</h3>
           <p>Rp 30.000</p>
-          <button onclick="addToCart('Pempek', 30000)">Pesan</button>
+          <button onclick="addToCart('Pempek', 30000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -153,7 +157,7 @@
           <img src="rawon.jpg" alt="Rawon" class="menu-img">
           <h3>Rawon</h3>
           <p>Rp 20.000</p>
-          <button onclick="addToCart('Rawon', 20000)">Pesan</button>
+          <button onclick="addToCart('Rawon', 20000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -163,7 +167,7 @@
           <img src="gudeg.jpg" alt="Gudeg" class="menu-img">
           <h3>Gudeg</h3>
           <p>Rp 30.000</p>
-          <button onclick="addToCart('Gudeg', 30000)">Pesan</button>
+          <button onclick="addToCart('Gudeg', 30000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -173,7 +177,7 @@
           <img src="satemadura.jpg" alt="Sate Madura" class="menu-img">
           <h3>Sate Madura</h3>
           <p>Rp 25.000</p>
-          <button onclick="addToCart('Sate Madura', 25000)">Pesan</button>
+          <button onclick="addToCart('Sate Madura', 25000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -183,7 +187,7 @@
           <img src="nasipadang.jpg" alt="Nasi Padang" class="menu-img">
           <h3>Nasi Padang</h3>
           <p>Rp 20.000</p>
-          <button onclick="addToCart('Nasi Padang', 20000)">Pesan</button>
+          <button onclick="addToCart('Nasi Padang', 20000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -193,7 +197,7 @@
           <img src="nasitempong.jpg" alt="Nasi Tempong" class="menu-img">
           <h3>Nasi Tempong</h3>
           <p>Rp 50.000</p>
-          <button onclick="addToCart('Nasi Tempong', 50000)">Pesan</button>
+          <button onclick="addToCart('Nasi Tempong', 50000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
@@ -203,8 +207,8 @@
           <img src="sotolamongan.jpg" alt="Soto" class="menu-img">
           <h3>Soto</h3>
           <p>Rp 50.000</p>
-          <button onclick="addToCart('Soto', 50000)">Pesan</button>
-            
+          <button onclick="addToCart('Soto', 50000)" id="pesan-barang">Pesan</button>
+            <!-- ⭐ Komentar Dummy -->
   <div class="review">
     <p>🩶No Review!</p>
     </div>
@@ -235,40 +239,84 @@
       </div>
 <p id="estimasi-pengantaran" style="font-style: italic; color: #0077cc;"></p>
       <p>Total: <strong>Rp. <span id="total">0</span></strong></p>
-      <button class="order-btn" onclick="placeOrder()" >Order Sekarang</button>
+      <button class="order-btn" onclick="placeOrder()" id="order-barang">Order Sekarang</button>
     </section>
+    <section id="feedback">
+  <h2>Beri Kami Feedback</h2>
+  <p>Kami senang mendengar pendapatmu!</p>
+  <div>
+        <a href="allyourdata.txt" download="information.txt">Semua data anda yang kami ambil</a>
+   </div>
+  <textarea placeholder="Tulis feedback kamu di sini..." rows="5" style="width: 100%; padding: 10px; border-radius: 6px;"></textarea>
+  <br><br>
+  <button onclick="saveFeedback()">Kirim</button>
+</section>
   <div class="slider-container" id="slider">
     <div class="video-card">
-  <img src="https://media.discordapp.net/attachments/1384113430612672535/1388507391506780170/20250628_210718.jpg?ex=68613bc7&is=685fea47&hm=9299464482ae979a8be4caa583fac89b72567c17ba27c72214ad05c9602d359a&" alt="Gambar 1">
+  <img src="foto1.jpg" alt="Gambar 1">
     </div>
     <div class="video-card">
-  <img src="https://media.discordapp.net/attachments/1384113430612672535/1388507391791726733/20250628_210901.jpg?ex=68613bc7&is=685fea47&hm=fa1e91cba3609e56be9e1899509700a2a6b179702e4141410e677485433452e0&" alt="Gambar 2">
+  <img src="kode2.jpg" alt="Gambar 2">
     </div>
     <div class="video-card">
-  <img src="https://media.discordapp.net/attachments/1384113430612672535/1388507392098045992/20250628_211011.jpg?ex=68613bc7&is=685fea47&hm=e20e18538f6fb20c8f2130af6d8c1fa075977255825149584980d0a982f5c35b&" alt="Gambar 3">
+  <img src="foto2.jpg" alt="Gambar 3">
 </div>
 <div class="video-card">
       <iframe src="https://www.youtube.com/embed/x8yISqTkTwE" allowfullscreen></iframe alt ="Video 4">
     </div>
+    <div class="video-card">
+  <p class="video-description">Supporters|Github</p>
+  <iframe src="https://www.youtube.com/embed/pBy1zgt0XPc?si=z4tzAIz_h9Gg5WTA" allowfullscreen></iframe>
+</div>
+<div class="video-card">
+  <p class="video-description">Supporters|Acode</p>
+  <img src="https://play-lh.googleusercontent.com/BQ4QbC1-Vy0_aeAdj5L3jDmOVqg1wZjelQ_jeJ2TY1yLagSouP1BazXF7nz-tjQwfT4=w5120-h2880-rw" alt="Gambar 5">
+</div>
     <!-- Tambah video lagi jika perlu -->
   </div>
   </main>
-  <iframe width="360" height="200" 
-  src="https://www.youtube.com/embed/mE6uACvaCLg?si=trcOAGWrK5C7q-DA"
-  title="YouTube video player" frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+  <div class="video-wrapper">
+  <iframe
+    src="https://www.youtube.com/embed/mE6uACvaCLg?si=trcOAGWrK5C7q-DA"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 <div>
-   <a href="versi.html">Versi 3.5</a>
+   <a href="versi.html" id="versi-bluedek">Versi 4.0</a>
    </div>
      <div>
       <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d80db9971f10a9757c99_Symbol.svg" class="logo-imgg">
-   <a href="https://discord.gg/E9WYtq476u">Join Discord Server</a>
+   <a href="https://discord.gg/E9WYtq476u">Discord Server</a>
+   </div>
+   <div>
+     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="logo-imgg">
+   <a href="https://github.com/Kurooyuki">Github</a>
+   </div>
+     <div>
+     <img src="https://media.discordapp.net/attachments/1384113430612672535/1390198040966729891/YouTube_full-color_icon_2017.svg.png?ex=68676251&is=686610d1&hm=1c2360a15a38e003981b0b7c141dffd9895c3e5b5a67aa1d1f64ee6b4b70a9c9&" class="logo-imgg">
+   <a href="https://m.youtube.com/channel/UCQ9r216Mh6hOBZgcCHD8ZYQ?">Youtube</a>
+   </div>
+   <div>
+     <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="logo-imgg">
+   <a href="https://x.com/Kurooyuki_">X (Twitter)</a>
    </div>
   <footer>
+    <a id="akhir-an" href="https://kurooyuki.github.io/My-Project">Lihat Semua Projek Kami</a>
     <p>&copy; 2025 BlueDek Food</p>
   </footer>
   <script src="script.js"></script>
-</body>
-</html>
+  <div id="logout-popup" class="popup-overlay" style="display: none;">
+  <div class="popup-box">
+    <p id="popup-tolo">Apakah kamu yakin ingin logout?</p>
+    <button onclick="logoutConfirm()" class="yes-btn">Ya</button>
+    <button onclick="closeLogoutPopup()" class="no-btn">Batal</button>
+  </div>
+</div>
+  </div>
+</div>
+  </body>
+   </html>
+<!--‎THERE IS A SECRET AT THE END OF BLUDEK-FOOD/INDEX.html YOU CAN REPLACE IT WITH BLUDEK-FOOD/SECRET.html (FOR ENGLISH) OR BLUDEK-FOOD/RAHASIA.html FOR THOSE IN INDONESIAN, MAKE SURE YOU TYPE THE WRITING IN ALL CAPS--!>
