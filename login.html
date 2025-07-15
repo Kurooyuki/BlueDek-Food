@@ -106,6 +106,13 @@
     </div>
   </div>
   <script>
+  if (!sessionStorage.getItem("fromIndex")) {
+    // Akses langsung atau bukan dari halaman utama → redirect
+    window.location.href = "index.html";
+  } else {
+    // Sudah lewat link Register/Login, hapus supaya tidak bisa refresh seenaknya
+    sessionStorage.removeItem("fromIndex");
+  }
 function login() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;

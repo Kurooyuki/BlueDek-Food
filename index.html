@@ -24,6 +24,45 @@
       <button onclick="navigate('feedback')">Feedback</button>
     </nav>
   </header>
+  <div class="music-player">
+  <span>🎵<strong>Popotan</strong></span>
+  <button onclick="document.getElementById('player').play()">Play</button>
+  <button onclick="document.getElementById('player').pause()">Pause</button>
+  <audio id="player" src="Popotan.mp3"></audio>
+</div>
+
+<style>
+  .music-player {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #1e1e2f;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 9999;
+  }
+
+  .music-player button {
+    background-color: #0077cc;
+    border: none;
+    color: white;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .music-player button:hover {
+    background-color: #0077cc;
+  }
+</style>
   <button onclick="toggleDarkMode()" id="dark-mode-btn">🌙 Dark Mode</button>
   <button onclick="toggleLanguage()" id="language-btn">🇮🇩 Bahasa</button>
 
@@ -32,7 +71,8 @@
       <h2 id="judul-home">Selamat Datang di BlueDek Food</h2>
       <p id="deskripsi-home">Pesan makanan favoritmu cepat dan aman!</p>
       <p id="deskripsi-homee">Untuk Memesan Makanan Pencet Tombol Menu.</p>
-      <a href="login.html">Register/Login</a>
+      <p id="deskripsii-home">Jangan masukkan email asli Anda ini hanya untuk menambah kehebohan, seolah Anda benar benar memesan makanan secara online.</p>
+     <a href="login.html" onclick="sessionStorage.setItem('fromIndex', 'true')">Register/Login</a>
       <button onclick="showLogoutPopup()" id="logout-btn" style="display: none;">
   Logout
     </section>
@@ -239,14 +279,96 @@
       <button class="order-btn" onclick="placeOrder()" id="order-barang">Order Sekarang</button>
     </section>
     <section id="feedback">
-  <h2>Beri Kami Feedback</h2>
-  <p>Kami senang mendengar pendapatmu!</p>
+  <h2 id="ketut-putra">Beri Kami Feedback</h2>
+  <p id="putra-ketut">Kami senang mendengar pendapatmu!</p>
   <div>
         <a href="allyourdata.txt" download="information.txt">Semua data anda yang kami ambil</a>
    </div>
   <textarea placeholder="Tulis feedback kamu di sini..." rows="5" style="width: 100%; padding: 10px; border-radius: 6px;"></textarea>
   <br><br>
   <button onclick="saveFeedback()">Kirim</button>
+</section>
+<section id="login"
+<div>
+<h1>Versi 2.0 Indonesia</h1>
+‎<p>-Menu Baru</p>
+‎Rawon✓
+‎Gado Gado✓
+‎Rendang✓
+‎Pempek✓
+‎Nasi Uduk✓
+‎Nasi Tempong✓
+‎Sate Madura✓
+‎Nasi Padang✓
+‎Gudeg✓
+‎<p>-Video Perkenalan Di Youtube</p>
+‎<p>-Tulisan Versi</p>
+<h1>Version 2.0 English</h1>
+‎<p>-New Menu</p>
+‎Rawon✓
+‎Gado Gado✓
+‎Rendang✓
+‎Pempek✓
+‎Nasi Uduk✓
+‎Nasi Tempong✓
+‎Sate Madura✓
+‎Nasi Padang✓
+‎Gudeg✓
+‎<p>-Introduction Video On Youtube</p>
+‎<p>-written version</p>
+</div>
+<div>
+<h1>Versi 2.5 Indonesia</h1>
+<p>-Fix Harga</p>
+<p>-Bug Fix</p>
+<h1>Version 2.5 English</h1>
+<p>-fix price</p>
+<p>-Bug Fix</p>
+</div>
+<div>
+<h1>Versi 2.6 Indonesia</h1>
+<p>-Easter Egg Baru</p>
+<p>-Bug Fix</p>
+<h1>Version 2.6 English</h1>
+<p>-New Easter Egg</p>
+<p>-Bug Fix</p>
+</div>
+<div>
+<h1>Versi 2.7 Indonesia</h1>
+<p>-Slider Endorse</p>
+<p>-Bug Fix</p>
+<p>-Join Discord Button</p>
+<a href="https://kurooyuki.github.io/BlueDek-Food/">Kembali Ke Website</a>
+</div>
+<h1>Version 2.7 English</h1>
+<p>-Slider Endorse</p>
+<p>-Bug Fix</p>
+<p>-Join Discord Button</p>
+<a href="https://kurooyuki.github.io/BlueDek-Food/">Go Back To Website</a>
+</div>
+<div>
+  <h1>Versi 3.0 Indonesia</h1>
+  <p>-Slider Video</p>
+  <p>-Font Baru</p>
+  <p>-Bug Fix</p>
+  <h1>Version 3.0 English</h1>
+  <p>-Slider Video</p>
+  <p>-New Font</p>
+  <p>-Bug Fix</p>
+</div>
+<div>
+  <h1>Versi 3.5 Indonesia</h1>
+  <p>-Bug Fix</p>
+  <h1>Version 3.5 English</h1>
+  <p>-Bug Fix</p>
+<div>
+<div>
+  <h1>Versi 4.0 English</h1>
+  <h1>This Is Big Update!</h1>
+   <h1>Versi 4.0 Indonesia</h1>
+  <h1>Update terbesar!</h1>
+  <a>Dev Lagi Malas Karna Update Yang Besar (If you are American/English and don't understand Indonesian, translate it yourself because the dev is also tired of changing it to English.)</a>
+</div>
 </section>
   <div class="slider-container" id="slider">
     <div class="video-card">
@@ -261,13 +383,83 @@
 <div class="video-card">
       <iframe src="https://www.youtube.com/embed/x8yISqTkTwE" allowfullscreen></iframe alt ="Video 4">
     </div>
-    <div class="video-card">
-  <p class="video-description">Supporters|Github</p>
-  <iframe src="https://www.youtube.com/embed/pBy1zgt0XPc?si=z4tzAIz_h9Gg5WTA" allowfullscreen></iframe>
+    <!-- Supporter 1: Github -->
+<div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px;">
+  <p style="font-size: 20px; font-weight: bold; color: #333;">
+    Supporters: 
+    <a href="https://github.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Github</a>
+    <span style="color: #000;">|</span>
+    <a href="https://github.com/kurooyuki" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Hosting</a>
+  </p>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+    <a href="https://play.google.com/store/apps/details?id=com.github.android" target="_blank">
+      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png"
+           alt="Download di Google Play"
+           style="width: 150px; height: auto;" />
+    </a>
+
+    <a href="https://apps.apple.com/us/app/github/id1477376905" target="_blank">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+           alt="Download on the App Store"
+           style="width: 150px; height: auto;" />
+    </a>
+  </div>
 </div>
-<div class="video-card">
-  <p class="video-description">Supporters|Acode</p>
-  <img src="https://play-lh.googleusercontent.com/BQ4QbC1-Vy0_aeAdj5L3jDmOVqg1wZjelQ_jeJ2TY1yLagSouP1BazXF7nz-tjQwfT4=w5120-h2880-rw" alt="Gambar 5">
+
+<!-- Supporter 2: Acode -->
+<div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px;">
+  <p style="font-size: 20px; font-weight: bold; color: #333;">
+    Supporters: 
+    <a href="https://acode.foxdebug.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Acode</a>
+    <span style="color: #000;">|</span>
+    <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Coding</a>
+  </p>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+    <a href="https://play.google.com/store/apps/details?id=com.foxdebug.acodefree&hl=id" target="_blank">
+      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png"
+           alt="Download di Google Play"
+           style="width: 150px; height: auto;" />
+    </a>
+   <!-- App Store -->
+<div style="text-align: center;">
+  <a href="https://f-droid.org/id/packages/com.foxdebug.acode/" target="_blank">
+  <img src="https://f-droid.org/badge/get-it-on.png"
+       alt="Download on the F-Droid"
+       style="width: 160px; height: auto;" />
+       <div>
+  <p style="font-size: 12px; color: red; margin-top: 5px;">Belum tersedia di App Store</p>
+  </div>
+</div>
+    </a>
+  </div>
+</div>
+
+<!-- Supporter 3: ChatGPT -->
+<div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <p style="font-size: 20px; font-weight: bold; color: #333;">
+    Supporters: 
+    <a href="https://chat.openai.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">ChatGpt</a>
+    <span style="color: #000;">|</span>
+    <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Idea</a>
+  </p>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+    <a href="https://play.google.com/store/apps/details?id=com.openai.chatgpt" target="_blank">
+      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/id_badge_web_generic.png"
+           alt="Download di Google Play"
+           style="width: 150px; height: auto;" />
+    </a>
+
+    <a href="https://apps.apple.com/us/app/chatgpt/id6448311069" target="_blank">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+           alt="Download on the App Store"
+           style="width: 150px; height: auto;" />
+    </a>
+  </div>
+</div>
+</div>
 </div>
     <!-- Tambah video lagi jika perlu -->
   </div>
@@ -282,7 +474,8 @@
   </iframe>
 </div>
 <div>
-   <a href="versi.html" id="versi-bluedek">Versi 4.0</a>
+   <a href="#login"
+      onclick="navigate('login')" id="versi-bluedek">Versi 4.0</a>
    </div>
      <div>
       <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d80db9971f10a9757c99_Symbol.svg" class="logo-imgg">
@@ -293,13 +486,35 @@
    <a href="https://github.com/Kurooyuki">Github</a>
    </div>
      <div>
-     <img src="https://media.discordapp.net/attachments/1384113430612672535/1390198040966729891/YouTube_full-color_icon_2017.svg.png?ex=68676251&is=686610d1&hm=1c2360a15a38e003981b0b7c141dffd9895c3e5b5a67aa1d1f64ee6b4b70a9c9&" class="logo-imgg">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="logo-imgg">
    <a href="https://m.youtube.com/channel/UCQ9r216Mh6hOBZgcCHD8ZYQ?">Youtube</a>
    </div>
-   <div>
      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="logo-imgg">
    <a href="https://x.com/Kurooyuki_">X (Twitter)</a>
    </div>
+     <p id="device-info">Mendeteksi perangkat...</p>
+  <script>
+    function detectDevice() {
+      const ua = navigator.userAgent.toLowerCase();
+
+      if (/tablet|ipad/.test(ua)) {
+        return "Tablet";
+      } else if (/mobile|android|iphone|ipod/.test(ua)) {
+        return "HP (Mobile)";
+      } else {
+        return "PC / Laptop";
+      }
+    }
+
+    const device = detectDevice();
+    document.getElementById("device-info").textContent = "Perangkat kamu/Your device: " + device;
+
+    if (device === "HP (Mobile)") {
+      document.querySelector(".mobile-only").style.display = "block";
+    } else {
+      document.querySelector(".desktop-only").style.display = "block";
+    }
+  </script>
   <footer>
     <a id="akhir-an" href="https://kurooyuki.github.io/My-Project">Lihat Semua Projek Kami</a>
     <p>&copy; 2025 BlueDek Food</p>
@@ -308,12 +523,10 @@
   <div id="logout-popup" class="popup-overlay" style="display: none;">
   <div class="popup-box">
     <p id="popup-tolo">Apakah kamu yakin ingin logout?</p>
+    <p id="popup-tolil">Akun kamu tidak akan hilang.</p>
     <button onclick="logoutConfirm()" class="yes-btn">Ya</button>
     <button onclick="closeLogoutPopup()" class="no-btn">Batal</button>
   </div>
-</div>
-  </div>
-</div>
   </body>
    </html>
 <!--‎THERE IS A SECRET AT THE END OF BLUDEK-FOOD/INDEX.html YOU CAN REPLACE IT WITH BLUDEK-FOOD/SECRET.html (FOR ENGLISH) OR BLUDEK-FOOD/RAHASIA.html FOR THOSE IN INDONESIAN, MAKE SURE YOU TYPE THE WRITING IN ALL CAPS--!>
