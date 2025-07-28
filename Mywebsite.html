@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuroyuki - My Project</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #00ffe7;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin: 0.3rem 0 0;
+      font-size: 1rem;
+      color: #b2fefa;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #7fdbff;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background-color: #1e293b;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      color: #00ffe7;
+    }
+
+    .project-card p {
+      margin: 0.5rem 0;
+    }
+
+    .status {
+      font-weight: bold;
+      color: #fffb00;
+    }
+
+    .status.selesai {
+      color: #00ff88;
+    }
+
+    .status.pengembangan {
+      color: #ff9900;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      margin-top: 3rem;
+      .link {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Kuroyuki</h1>
+    <p>My Project</p>
+  </header>
+
+  <main>
+    <h2 class="section-title">Daftar Proyek</h2>
+    <div class="project-list">
+      <div class="project-card">
+        <h3>BlueDek Food</h3>
+        <p>Website Pemesanan Makanan.</p>
+       <div class="link">
+        <a href="https://kurooyuki.github.io/BlueDek-Food/index.html">Kunjungi BlueDek Food</a>
+      </div>
+        <p>Status: <span class="status pengembangan">Dalam Pengembangan</span></p>
+      </div>
+
+      <div class="project-card">
+        <h3>BlueJek Food</h3>
+        <p>Website Prototype Sebelum BlueDek Food Dirilis.</p>
+        <div class="link">
+        <a href="https://kurooyuki.github.io/BlueJek">Kunjungi BlueJek Food</a>
+      </div>
+        <p>Status: <span class="status selesai">Selesai</span></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 - Kuroyuki
+  </footer>
+
+  <script>
+    // Tidak ada interaksi saat ini
+  </script>
+
+</body>
+</html>

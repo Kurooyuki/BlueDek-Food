@@ -21,7 +21,7 @@
         Keranjang
         <span id="nav-cart-badge" style="display: none; position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 12px; padding: 2px 6px; border-radius: 50%;">0</span>
       </button>
-      <button onclick="navigate('feedback')">Feedback</button>
+      <button onclick="navigate('bluepay')">BluePay</button>
     </nav>
   </header>
   <div class="music-player">
@@ -72,9 +72,15 @@
       <p id="deskripsi-home">Pesan makanan favoritmu cepat dan aman!</p>
       <p id="deskripsi-homee">Untuk Memesan Makanan Pencet Tombol Menu.</p>
       <p id="deskripsii-home">Jangan masukkan email asli Anda ini hanya untuk menambah kehebohan, seolah Anda benar benar memesan makanan secara online.</p>
+       <a href="filetambahan.html" style="color: blue;">Cek koneksi</a>
+      <div>
+      <a onclick="navigate('feedback')" >Give Us Feedback</a>
+      </div>
+      <div>
      <a href="login.html" onclick="sessionStorage.setItem('fromIndex', 'true')">Register/Login</a>
       <button onclick="showLogoutPopup()" id="logout-btn" style="display: none;">
   Logout
+  </div>
     </section>
     <section id="menu">
       <h2 id="judul-menu">Menu Kami</h2>
@@ -268,9 +274,8 @@
         <input type="tel" id="customer-phone" placeholder="Phone Number"><br>
         <label for="metode-pembayaran">Payment Method:</label>
         <select id="metode-pembayaran">
-          <option value="transfer">Transfer Bank (Coming Soon)</option>
           <option value="cod">COD (Bayar di Tempat)</option>
-          <option value="ewallet">E-Wallet (Coming Soon)</option>
+         <option value="bluepay">BluePay</option>
         </select>
         <div id="info-pembayaran" style="margin-top: 10px;"></div>
       </div>
@@ -287,7 +292,48 @@
   <textarea placeholder="Tulis feedback kamu di sini..." rows="5" style="width: 100%; padding: 10px; border-radius: 6px;"></textarea>
   <br><br>
   <button onclick="saveFeedback()">Kirim</button>
+</div>
 </section>
+<section id="bluepay">
+  <h2>Saldo BluePay Kamu</h2>
+  <p>💰 Rp <span id="bluepay-saldo">0</span></p>
+  <button onclick="showTopUpOptions()">Top Up</button>
+</section>
+<section id="debit-card">
+  <button onclick="selectTopUp('Penarikan Tunai')">Penarikan Tunai</button>
+  <button onclick="navigate('bluepay')">Lihat Saldo</button>
+</section>
+<!-- Modal Top Up --><div id="topup-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeTopUpModal()">&times;</span>
+    <span class="close" onclick="closeTopUpModal()">!</span>
+    <h3>Pilih Metode Top Up</h3><div class="topup-section">
+  <h4>Tambah Akun Bank</h4>
+  <button onclick="navigate('debit-card')" ="closeTopUpModal()">💳 Debit Card</button>
+  <button class="topup-option" onclick="selectTopUp('BCA Oneklik')">
+  <img src="assets/bca.png" alt="BCA Oneklik" class="topup-logo"> BCA Oneklik
+</button>
+  <button class="topup-option" onclick="selectTopUp('Jago Pockets')">
+  <img src="assets/jago.png" alt="Jago Pockets" class="topup-logo"> Jago Pockets
+</button>
+  <button class="topup-option" onclick="selectTopUp('BRI Direct')">
+  <img src="assets/bri.png" alt="BRI Direct" class="topup-logo"> BRI Direct
+</button>
+</div>
+
+<div class="topup-section">
+  <h4>Pakai Uang Tunai</h4>
+  <button class="topup-option" onclick="selectTopUp('Alfamart')">
+  <img src="assets/alfamart.png" alt="Alfamart" class="topup-logo"> Alfamart
+</button>
+ <button class="topup-option" onclick="selectTopUp('Indomaret')">
+  <img src="indomaret.png" alt="Indomaret" class="topup-logo"> Indomaret
+</button>
+  <button onclick="selectTopUp('ATM Bersama')">🏧 ATM Bersama</button>
+</div>
+
+  </div>
+</div>
 <section id="login"
 <div>
 <h1>Versi 2.0 Indonesia</h1>

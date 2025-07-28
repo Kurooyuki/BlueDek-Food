@@ -7,7 +7,7 @@
 
   try {
     // Ping Google (tanpa-cors karena browser modern batasi)
-    await fetch("https://www.google.com", { mode: "no-cors" });
+    await fetch("", { mode: "no-cors" });
   } catch (e) {
     showOfflinePage();
   }
@@ -28,7 +28,18 @@ const validVouchers = {
   "BELANJAHEMAT": 100000,
   "GITHUB": 100000,
   "EASTEREGG": 10000,
- 
+  "MAKAN10": 30000,
+  "DISKON20": 30000,
+  "BLUE30": 30000,
+  "CHEF50": 30000,
+  "HEMAT25": 30000,
+  "GRATISONGKIR": 30000,
+  "MAKAN20": 30000,
+  "DISKON30": 30000,
+  "BLUE40": 30000,
+  "CHEF60": 30000,
+  "HEMAT30": 30000,
+  "ONGKIRGRATIS": 30000,
 };
 
 function navigate(page) {
@@ -91,7 +102,6 @@ function placeOrder() {
   const phone = document.getElementById('customer-phone').value.trim();
   const metode = document.getElementById('metode-pembayaran').value;
   const estimasiEl = document.getElementById('estimasi-pengantaran');
-
   if (cart.length === 0) {
     alert("Keranjang kosong!");
     return;
@@ -119,7 +129,14 @@ function placeOrder() {
   });
   total -= voucherDiscount;
   if (total < 0) total = 0;
-
+if (metode === "bluepay") {
+  if (bluepaySaldo < total) {
+    alert("Saldo BluePay tidak cukup!");
+    return;
+  }
+  bluepaySaldo -= total;
+  document.getElementById("bluepay-saldo").textContent = bluepaySaldo;
+}
   ringkasan += `\nDiskon: Rp ${voucherDiscount}\nTotal Bayar: Rp ${total}\nEstimasi antar: ${estimasi} menit`;
 
   alert("Pesanan berhasil!\n\n" + ringkasan);
@@ -156,6 +173,7 @@ function toggleLanguage() {
     // Ubah teks ke English
     document.getElementById("judul-home").textContent = "Welcome to BlueDek Food";
     document.getElementById("akhir-an").textContent = "See All My Project";
+    document.getElementById("popup-tolil").textContent = "Your account will not be lost.";
     document.getElementById("popup-tolo").textContent = "Are you sure you want to log out?";
     document.getElementById("popup-tolo").textContent = "Are you sure you want to log out?";
     document.getElementById("but-ton").textContent = "Cart";
@@ -163,6 +181,7 @@ function toggleLanguage() {
     document.getElementById("versi-bluedek").textContent = "Version 4.0";
     document.getElementById("order-barang").textContent = "Order Now";
     document.getElementById("deskripsi-home").textContent = "Order your favorite food fast and safely!";
+    document.getElementById("deskripsii-home").textContent = "Don't enter your real email just to add excitement like you're actually ordering food online.";
     document.getElementById("deskripsi-homee").textContent = "To order food, press the menu button.";
     document.getElementById("judul-menu").textContent = "Our Menu";
     document.getElementById("judul-cart").textContent = "Your Cart";
@@ -170,6 +189,8 @@ function toggleLanguage() {
     document.getElementById("label-nama").placeholder = "Full Name";
     document.getElementById("label-alamat").placeholder = "Full Address";
     document.getElementById("order-barang1").textContent = "Order";
+    document.getElementById("ketut-putra").textContent = "Give Us Feedback";
+        document.getElementById("putra-ketut").textContent = "We'd love to hear from you!";
 document.getElementById("order-barang2").textContent = "Order";
 document.getElementById("order-barang3").textContent = "Order";
 document.getElementById("order-barang4").textContent = "Order";
@@ -188,13 +209,16 @@ document.getElementById("order-barang15").textContent = "Order";
 document.getElementById("order-barang16").textContent = "Order";
     document.getElementById("label-hp").placeholder = "Phone Number";
     document.querySelector(".order-btn").textContent = "Place Order";
-  } else {
+  document.querySelector("deteksi").textContent = "";
+  }
+  else {
     currentLanguage = "id";
     langBtn.textContent = "🇮🇩 Bahasa";
 
     // Ubah kembali ke Indonesia
     document.getElementById("judul-home").textContent = "Selamat Datang di BlueDek Food";
     document.getElementById("akhir-an").textContent = "Lihat Semua Projek Kami";
+    document.getElementById("popup-tolil").textContent = "Akun kamu tidak akan hilang.";
     document.getElementById("popup-tolo").textContent = "Apakah kamu yakin ingin logout?";
     document.getElementById("but-ton").textContent = "Keranjang";
     document.getElementById("pesan-barang").textContent = "Pesan";
@@ -202,12 +226,15 @@ document.getElementById("order-barang16").textContent = "Order";
     document.getElementById("order-barang").textContent = "Order Sekarang";
     document.getElementById("deskripsi-home").textContent = "Pesan makanan favoritmu cepat dan aman!";
     document.getElementById("deskripsi-homee").textContent = "Untuk Memesan Makanan Pencet Tombol Menu.";
+    document.getElementById("deskripsii-home").textContent = "Jangan masukkan email asli Anda ini hanya untuk menambah kehebohan, seolah Anda benar benar memesan makanan secara online.";
     document.getElementById("judul-menu").textContent = "Menu Kami";
     document.getElementById("judul-cart").textContent = "Keranjang Kamu";
     document.getElementById("label-voucher").textContent = "Kode Voucher:";
     document.getElementById("label-nama").placeholder = "Nama lengkap";
     document.getElementById("label-alamat").placeholder = "Alamat lengkap";
         document.getElementById("order-barang1").textContent = "Pesan";
+        document.getElementById("ketut-putra").textContent = "Beri Kami Feedback";
+        document.getElementById("putra-ketut").textContent = "Kami senang mendengar pendapatmu!";
 document.getElementById("order-barang2").textContent = "Pesan";
 document.getElementById("order-barang3").textContent = "Pesan";
 document.getElementById("order-barang4").textContent = "Pesan";
@@ -318,31 +345,75 @@ function cekKota() {
   const output = document.getElementById("lokasi-output");
 
   if (!navigator.geolocation) {
-    output.textContent = "Geolocation tidak didukung di browser ini.";
+    output.textContent = "Geolocation tidak didukung.";
     return;
   }
 
   output.textContent = "Sedang mencari lokasi...";
 
   navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+    async (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
 
       try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=id`);
         const data = await res.json();
+        const kota = data.city || data.locality || data.principalSubdivision;
+        const negara = data.countryName;
 
-        const city = data.address.city || data.address.town || data.address.village || data.address.county;
-        const country = data.address.country;
-
-        output.textContent = `Lokasi Anda: ${city}, ${country}`;
-      } catch (e) {
-        output.textContent = "Gagal mengambil informasi lokasi.";
+        output.textContent = `Lokasi Anda: ${kota}, ${negara}`;
+      } catch {
+        output.textContent = "Gagal mendapatkan nama kota.";
       }
     },
     () => {
-      output.textContent = "Gagal mendapatkan lokasi (mungkin izin ditolak).";
+      output.textContent = "Izin lokasi ditolak atau dibatalkan.";
     }
   );
+}
+  function navigate(pageId) {
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => section.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+  }
+
+  // Tampilkan hanya halaman "home" saat pertama kali
+  window.addEventListener('DOMContentLoaded', () => {
+    navigate('home');
+  });
+  let bluepaySaldo = 0;
+
+function topUpBluePay() {
+  const input = document.getElementById("topup-input");
+  const jumlah = parseInt(input.value);
+  if (isNaN(jumlah) || jumlah <= 0) {
+    alert("Masukkan jumlah yang valid.");
+    return;
+  }
+  bluepaySaldo += jumlah;
+  document.getElementById("bluepay-saldo").textContent = bluepaySaldo;
+  input.value = "";
+  alert(`Top up berhasil! Saldo sekarang: Rp ${bluepaySaldo}`);
+}
+function showTopUpOptions() {
+  document.getElementById("topup-modal").style.display = "block";
+}
+
+function closeTopUpModal() {
+  document.getElementById("topup-modal").style.display = "none";
+}
+
+function selectTopUp(method) {
+  closeTopUpModal();
+  const input = prompt(`Metode: ${method}\nMasukkan jumlah top up:`);
+  const jumlah = parseInt(input);
+  if (isNaN(jumlah) || jumlah <= 0) {
+    alert("Top up gagal. Masukkan jumlah yang valid.");
+    return;
+  }
+
+  bluepaySaldo += jumlah;
+  document.getElementById("bluepay-saldo").textContent = bluepaySaldo;
+  alert(`Top up berhasil via ${method}! Saldo: Rp ${bluepaySaldo}`);
 }
