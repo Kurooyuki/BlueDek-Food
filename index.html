@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2196F3">
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js")
+      .then(reg => console.log("Service Worker terdaftar:", reg))
+      .catch(err => console.log("Service Worker gagal:", err));
+  }
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlueDek Food</title>
@@ -298,6 +307,9 @@
   <h2>Saldo BluePay Kamu</h2>
   <p>💰 Rp <span id="bluepay-saldo">0</span></p>
   <button onclick="showTopUpOptions()">Top Up</button>
+  <div style="text-align:center; padding:50px; font-family:sans-serif">
+  <h1>This feature is not available for America or other countries.</h1>
+  </div>
 </section>
 <section id="debit-card">
   <button onclick="selectTopUp('Penarikan Tunai')">Penarikan Tunai</button>
@@ -433,7 +445,7 @@
 <div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px;">
   <p style="font-size: 20px; font-weight: bold; color: #333;">
     Supporters: 
-    <a href="https://github.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Github</a>
+    <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Github</a>
     <span style="color: #000;">|</span>
     <a href="https://github.com/kurooyuki" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Hosting</a>
   </p>
@@ -449,6 +461,7 @@
       <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
            alt="Download on the App Store"
            style="width: 150px; height: auto;" />
+             <a href="https://github.io" style="color: blue;">github.io</a>
     </a>
   </div>
 </div>
@@ -457,7 +470,7 @@
 <div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-bottom: 20px;">
   <p style="font-size: 20px; font-weight: bold; color: #333;">
     Supporters: 
-    <a href="https://acode.foxdebug.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Acode</a>
+    <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Acode</a>
     <span style="color: #000;">|</span>
     <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Coding</a>
   </p>
@@ -476,6 +489,7 @@
        style="width: 160px; height: auto;" />
        <div>
   <p style="font-size: 12px; color: red; margin-top: 5px;">Belum tersedia di App Store</p>
+   <a href="https://acode.app" style="color: blue;">acode.app</a>
   </div>
 </div>
     </a>
@@ -486,7 +500,7 @@
 <div style="background-color: #e6f0fa; border-radius: 20px; padding: 20px; text-align: left; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
   <p style="font-size: 20px; font-weight: bold; color: #333;">
     Supporters: 
-    <a href="https://chat.openai.com" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">ChatGpt</a>
+    <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">ChatGpt</a>
     <span style="color: #000;">|</span>
     <a href="#" target="_blank" style="color: #0047FF; font-weight: bold; text-decoration: none;">Idea</a>
   </p>
@@ -503,6 +517,7 @@
            alt="Download on the App Store"
            style="width: 150px; height: auto;" />
     </a>
+    <a href="https://chatgpt.com" style="color: blue;">chatgpt.com</a>
   </div>
 </div>
 </div>
@@ -513,6 +528,15 @@
   <div class="video-wrapper">
   <iframe
     src="https://www.youtube.com/embed/mE6uACvaCLg?si=trcOAGWrK5C7q-DA"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<div class="video-wrapper">
+  <iframe
+    src="https://www."
     title="YouTube video player"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
