@@ -496,4 +496,6 @@ main section.active {
   width: 24px;
   height: 24px;
   object-fit: contain;
+ .fredoka {
+  font-family: 'Fredoka One', cursive;
 }
