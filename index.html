@@ -19,8 +19,8 @@
 </head>
 <div id="loading">
   <div class="spinner"></div>
-  <p>Wait a moment...</p>
-  </div>
+  <p id="loading-text">Wait a moment</p>
+</div>
 <style>
   #loading {
     position: fixed;
@@ -55,10 +55,29 @@
   }
 </style>
 <script>
-  window.onload = function() {
+  const loadingText = document.getElementById("loading-text");
+  let dots = 0;
+  let interval;
+
+  function startLoadingAnimation() {
+    interval = setInterval(() => {
+      dots = (dots + 1) % 4; // 0,1,2,3
+      loadingText.textContent = "Wait a moment" + ".".repeat(dots);
+    }, 500); // ganti titik setiap 0.5 detik
+  }
+
+  if (sessionStorage.getItem("loaded")) {
+    // Kalau sudah pernah buka, langsung sembunyikan
     document.getElementById("loading").style.display = "none";
-    document.getElementById("app").style.display = "block";
-  };
+  } else {
+    // Baru pertama kali buka
+    startLoadingAnimation();
+    window.onload = function() {
+      clearInterval(interval);
+      document.getElementById("loading").style.display = "none";
+      sessionStorage.setItem("loaded", "true");
+    };
+  }
 </script>
 </div>
 <body>
@@ -137,13 +156,51 @@
   Logout
   </div>
     </section>
+    <div id="status"></div>
+<div id="countdown"></div>
     <section id="menu">
       <h2 id="judul-menu">Menu Kami</h2>
       <div class="menu-grid">
         <div class="card">
-          <img src="ayam.jpg" alt="Ayam Bakar" class="menu-img">
+          <img src="ayam.jpg" alt="Ayam Bakar" class="menu-img" loading="lazy">
           <h3>Ayam Bakar</h3>
-          <p>Rp 250.000</p>
+          <p>Rp 25.000</p>
+<form id="orderForm">
+  <label>
+    <input type="checkbox" class="topping" value="5000">
+    + Keju (Rp5.000)
+  </label><br>
+  <label>
+    <input type="checkbox" class="topping" value="3000">
+    + Extra Sambal (Rp3.000)
+  </label><br>
+  <label>
+    <input type="checkbox" class="topping" value="4000">
+    + Nasi Tambah (Rp4.000)
+  </label><br><br>
+
+  <strong>Total: <span id="total">Rp20.000</span></strong>
+</form>
+
+<script>
+  const basePrice = 20000;
+  const toppings = document.querySelectorAll(".topping");
+  const totalDisplay = document.getElementById("total");
+
+  function updateTotal() {
+    let total = basePrice;
+    toppings.forEach(topping => {
+      if (topping.checked) {
+        total += parseInt(topping.value);
+      }
+    });
+    totalDisplay.textContent = "Rp" + total.toLocaleString("id-ID");
+  }
+
+  toppings.forEach(topping => {
+    topping.addEventListener("change", updateTotal);
+  });
+</script>
           <button onclick="addToCart('Ayam Bakar', 250000)" id="pesan-barang">Pesan</button>
             <!-- ⭐ Komentar Dummy -->
   <div class="review">
@@ -152,7 +209,7 @@
 </div>
         </div>
         <div class="card">
-          <img src="pizza.jpg" alt="Pizza" class="menu-img">
+          <img src="pizza.jpg" alt="Pizza" class="menu-img" loading="lazy">
           <h3>Pizza Large</h3>
           <p>Rp 350.000</p>
           <button onclick="addToCart('Pizza Large', 350000)" id="order-barang1">Pesan</button>
@@ -161,7 +218,7 @@
 </div>
         </div>
         <div class="card">
-          <img src="nasgor.jpg" alt="Nasi Goreng" class="menu-img">
+          <img src="nasgor.jpg" alt="Nasi Goreng" class="menu-img" loading="lazy">
           <h3>Nasi Goreng Spesial</h3>
           <p>Rp 20.000</p>
           <button onclick="addToCart('Nasi Goreng', 20000)" id="pesan-barang">Pesan</button>
@@ -171,7 +228,7 @@
 </div>
         </div>
         <div class="card">
-          <img src="bakso.jpg" alt="Bakso" class="menu-img">
+          <img src="bakso.jpg" alt="Bakso" class="menu-img" loading="lazy">
           <h3>Bakso</h3>
           <p>Rp 100.000</p>
           <button onclick="addToCart('Bakso', 100000)" id="pesan-barang">Pesan</button>
@@ -181,7 +238,7 @@
 </div>
         </div>
         <div class="card">
-          <img src="lalapan.jpeg" alt="Lalapan" class="menu-img">
+          <img src="lalapan.jpeg" alt="Lalapan" class="menu-img" loading="lazy">
           <h3>Lalapan</h3>
           <p>Rp 100.000</p>
           <button onclick="addToCart('Lalapan', 100000)" id="pesan-barang">Pesan</button>
@@ -191,7 +248,7 @@
 </div>
         </div>
         <div class="card">
-  <img src="mieayam.jpg" alt="Mie Ayam" class="menu-img">
+  <img src="mieayam.jpg" alt="Mie Ayam" class="menu-img" loading="lazy">
   <h3>Mie Ayam</h3>
   <p>Rp 20.000</p>
   <button onclick="addToCart('Mie Ayam ', 20000)" id="pesan-barang">Pesan</button>
@@ -201,7 +258,7 @@
 </div>
 </div>
 <div class="card">
-  <img src="ayambetutu.jpg" alt="Ayam Betutu" class="menu-img">
+  <img src="ayambetutu.jpg" alt="Ayam Betutu" class="menu-img" loading="lazy">
   <h3>Ayam Betutu</h3>
   <p>Rp 200.000</p>
   <button onclick="addToCart('Ayam Betutu ', 200000)" id="pesan-barang">Pesan</button>
@@ -212,7 +269,7 @@
 </div>
       </div>
         <div class="card">
-          <img src="gadogado.jpg" alt="Gado Gado" class="menu-img">
+          <img src="gadogado.jpg" alt="Gado Gado" class="menu-img" loading="lazy">
           <h3>Gado Gado</h3>
           <p>Rp 20.000</p>
           <button onclick="addToCart('Gado Gado', 20000)" id="pesan-barang">Pesan</button>
@@ -222,7 +279,7 @@
   </div>
   </div>
         <div class="card">
-          <img src="rendang.jpg" alt="Rendang" class="menu-img">
+          <img src="rendang.jpg" alt="Rendang" class="menu-img" loading="lazy">
           <h3>Rendang</h3>
           <p>Rp 35.000</p>
           <button onclick="addToCart('Rendang', 35000)" id="pesan-barang">Pesan</button>
@@ -232,7 +289,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="nasiuduk.jpg" alt="Nasi Uduk" class="menu-img">
+          <img src="nasiuduk.jpg" alt="Nasi Uduk" class="menu-img" loading="lazy">
           <h3>Nasi Uduk</h3>
           <p>Rp 15.000</p>
           <button onclick="addToCart('Nasi Uduk', 15000)" id="pesan-barang">Pesan</button>
@@ -242,7 +299,7 @@
         </div>
         </div>
         <div class="card">
-          <img src="pempek.jpg" alt="Pempek" class="menu-img">
+          <img src="pempek.jpg" alt="Pempek" class="menu-img" loading="lazy">
           <h3>Pempek</h3>
           <p>Rp 30.000</p>
           <button onclick="addToCart('Pempek', 30000)" id="pesan-barang">Pesan</button>
@@ -252,7 +309,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="rawon.jpg" alt="Rawon" class="menu-img">
+          <img src="rawon.jpg" alt="Rawon" class="menu-img" loading="lazy">
           <h3>Rawon</h3>
           <p>Rp 20.000</p>
           <button onclick="addToCart('Rawon', 20000)" id="pesan-barang">Pesan</button>
@@ -262,7 +319,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="gudeg.jpg" alt="Gudeg" class="menu-img">
+          <img src="gudeg.jpg" alt="Gudeg" class="menu-img" loading="lazy">
           <h3>Gudeg</h3>
           <p>Rp 30.000</p>
           <button onclick="addToCart('Gudeg', 30000)" id="pesan-barang">Pesan</button>
@@ -272,7 +329,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="Satemadura.jpg" alt="Sate Madura" class="menu-img">
+          <img src="satemadura.jpg" alt="Sate Madura" class="menu-img" loading="lazy">
           <h3>Sate Madura</h3>
           <p>Rp 25.000</p>
           <button onclick="addToCart('Sate Madura', 25000)" id="pesan-barang">Pesan</button>
@@ -282,7 +339,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="nasipadang.jpg" alt="Nasi Padang" class="menu-img">
+          <img src="nasipadang.jpg" alt="Nasi Padang" class="menu-img" loading="lazy">
           <h3>Nasi Padang</h3>
           <p>Rp 20.000</p>
           <button onclick="addToCart('Nasi Padang', 20000)" id="pesan-barang">Pesan</button>
@@ -292,7 +349,7 @@
     </div>
     </div>
         <div class="card">
-          <img src="nasitempong.jpg" alt="Nasi Tempong" class="menu-img">
+          <img src="nasitempong.jpg" alt="Nasi Tempong" class="menu-img" loading="lazy">
           <h3>Nasi Tempong</h3>
           <p>Rp 50.000</p>
           <button onclick="addToCart('Nasi Tempong', 50000)" id="pesan-barang">Pesan</button>
@@ -302,7 +359,7 @@
     </div>
     </div>
 <div class="card">
-          <img src="sotolamongan.jpg" alt="Soto" class="menu-img">
+          <img src="sotolamongan.jpg" alt="Soto" class="menu-img" loading="lazy">
           <h3>Soto</h3>
           <p>Rp 50.000</p>
           <button onclick="addToCart('Soto', 50000)" id="pesan-barang">Pesan</button>
@@ -335,7 +392,7 @@
         <div id="info-pembayaran" style="margin-top: 10px;"></div>
       </div>
 <p id="estimasi-pengantaran" style="font-style: italic; color: #0077cc;"></p>
-      <p>Total: <strong>Rp. <span id="total">0</span></strong></p>
+      <p>Total: <strong>Rp. <span id="total">0 (Bug)</span></strong></p>
       <button class="order-btn" onclick="placeOrder()" id="order-barang">Order Sekarang</button>
     </section>
     <section id="feedback">
@@ -640,7 +697,7 @@
     }
 
     const device = detectDevice();
-    document.getElementById("device-info").textContent = "Perangkat kamu/Your device: " + device;
+    document.getElementById("device-info").textContent = "Your device: " + device;
 
     if (device === "HP (Mobile)") {
       document.querySelector(".mobile-only").style.display = "block";

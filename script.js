@@ -394,3 +394,64 @@ function selectTopUp(method) {
   document.getElementById("bluepay-saldo").textContent = bluepaySaldo;
   alert(`Top up berhasil via ${method}! Saldo: Rp ${bluepaySaldo}`);
 }
+// ==== JAM BUKA ====
+const buka = 10;
+const tutup = 22;
+
+function cekStatus() {
+  const now = new Date();
+  const jam = now.getHours();
+  const menit = now.getMinutes();
+  const detik = now.getSeconds();
+
+  const statusDiv = document.getElementById("status");
+  const countdownDiv = document.getElementById("countdown");
+
+  if (jam >= buka && jam < tutup) {
+    statusDiv.innerHTML = "Semua Restoran Buka (10:00 - 22:00)";
+    statusDiv.style.color = "green";
+
+    let sisaJam = tutup - jam - 1;
+    let sisaMenit = 59 - menit;
+    let sisaDetik = 59 - detik;
+    countdownDiv.innerHTML = `⏳ Tutup dalam ${sisaJam} jam ${sisaMenit} menit ${sisaDetik} detik`;
+  } else {
+    statusDiv.innerHTML = "Semua Restoran Tutup (Buka 10:00 - 22:00)";
+    statusDiv.style.color = "red";
+
+    let sisaJam;
+    if (jam < buka) {
+      sisaJam = buka - jam - 1;
+    } else {
+      sisaJam = 24 - jam + buka - 1;
+    }
+    let sisaMenit = 59 - menit;
+    let sisaDetik = 59 - detik;
+    countdownDiv.innerHTML = `⏳ Buka lagi dalam ${sisaJam} jam ${sisaMenit} menit ${sisaDetik} detik`;
+  }
+}
+setInterval(cekStatus, 1000);
+cekStatus();
+
+// ==== HITUNG TOTAL UNTUK SEMUA MENU ====
+const menus = document.querySelectorAll(".menu");
+
+menus.forEach(menu => {
+  const basePrice = parseInt(menu.getAttribute("data-base"));
+  const checkboxes = menu.querySelectorAll("input[type='checkbox']");
+  const totalDisplay = menu.querySelector(".total");
+
+  function updateTotal() {
+    let total = basePrice;
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        total += parseInt(cb.value);
+      }
+    });
+    totalDisplay.textContent = "Rp" + total.toLocaleString("id-ID");
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener("change", updateTotal);
+  });
+});
