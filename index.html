@@ -140,7 +140,29 @@
       <p id="deskripsi-homee">Untuk Memesan Makanan Pencet Tombol Menu.</p>
       <p id="deskripsii-home">Jangan masukkan email asli Anda ini hanya untuk menambah kehebohan, seolah Anda benar benar memesan makanan secara online.</p>
       <p>Untuk kembali ke menu ini pencet logo kami.</p>
-       <a href="filetambahan.html" style="color: blue;">Cek koneksi</a>
+<a href="cekping.html" id="smartLink" style="color: blue;">Cek koneksi</a>
+<script>
+document.getElementById('smartLink').addEventListener('click', async function(e) {
+  e.preventDefault(); // supaya kita kontrol navigasinya
+  const target = 'filetambahan.html';
+  const fallback = 'cekping.html';
+
+  try {
+    // pakai HEAD supaya data minimal (server harus mendukung)
+    const res = await fetch(target, { method: 'HEAD' });
+    if (res.ok) {
+      // file tersedia -> buka
+      window.location.href = target;
+    } else {
+      // tidak 200 -> buka fallback
+      window.location.href = fallback;
+    }
+  } catch (err) {
+    // error (mis. network, CORS, atau file tidak ada)
+    window.location.href = fallback;
+  }
+});
+</script>
       <div>
       <a onclick="navigate('feedback')" >Give Us Feedback</a>
       </div>

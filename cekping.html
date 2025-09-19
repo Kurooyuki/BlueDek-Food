@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  <title>Cek Ping Internet</title>
+</head>
+<body>
+  <h1>Cek Ping Internet</h1>
+
+  <button onclick="cekPing()">Cek Ping</button>
+  <p id="hasilPing">Ping: -</p>
+  <a href="index.html">Kembali Ke Bluedek Food</a>
+
+  <script>
+    function cekPing() {
+      const url = "https://www.google.com/favicon.ico"; // File kecil dan cepat
+      const mulai = performance.now();
+
+      fetch(url + "?t=" + Date.now(), { mode: "no-cors" })
+        .then(() => {
+          const selesai = performance.now();
+          const ping = Math.round(selesai - mulai);
+          tampilkanPing(ping);
+        })
+        .catch(() => {
+          document.getElementById("hasilPing").textContent = "Ping gagal.";
+        });
+    }
+
+    function tampilkanPing(ping) {
+      let kualitas = "";
+
+      if (ping <= 50) kualitas = "Bagus ✅";
+      else if (ping <= 100) kualitas = "Cukup ⚠️";
+      else kualitas = "Buruk ❌";
+
+      document.getElementById("hasilPing").textContent = `Ping: ${ping} ms (${kualitas})`;
+    }
+  </script>
+</body>
+</html>
