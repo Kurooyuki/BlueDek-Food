@@ -145,7 +145,7 @@ function toggleLanguage() {
 
   if (currentLanguage === "id") {
     currentLanguage = "en";
-    langBtn.textContent = "🇬🇧 English";
+    langBtn.textContent = "🇬🇧 English (90%)";
 
     // Ubah teks ke English
     document.getElementById("judul-home").textContent = "Welcome to BlueDek Food";
@@ -190,7 +190,7 @@ document.getElementById("order-barang16").textContent = "Order";
   }
   else {
     currentLanguage = "id";
-    langBtn.textContent = "🇮🇩 Bahasa";
+    langBtn.textContent = "🇮🇩 Bahasa (100%)";
 
     // Ubah kembali ke Indonesia
     document.getElementById("judul-home").textContent = "Selamat Datang di BlueDek Food";
