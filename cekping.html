@@ -3,7 +3,7 @@
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
-  <title>Cek Ping Internet</title>
+  <title>Cek Pingg Internet</title>
 </head>
 <body>
   <h1>Cek Ping Internet</h1>
@@ -11,7 +11,28 @@
   <button onclick="cekPing()">Cek Ping</button>
   <p id="hasilPing">Ping: -</p>
   <a href="index.html">Kembali Ke Bluedek Food</a>
+     <p id="device-info">Mendeteksi perangkat...</p>
+  <script>
+    function detectDevice() {
+      const ua = navigator.userAgent.toLowerCase();
 
+      if (/tablet|ipad/.test(ua)) {
+        return "Tablet";
+      } else if (/mobile|android|iphone|ipod/.test(ua)) {
+        return "HP (Mobile)";
+      } else {
+        return "PC / Laptop";
+      }
+    }
+
+    const device = detectDevice();
+    document.getElementById("device-info").textContent = "Your device: " + device;
+
+    if (device === "HP (Mobile)") {
+      document.querySelector(".mobile-only").style.display = "block";
+    } else {
+      document.querySelector(".desktop-only").style.display = "block";
+    }
   <script>
     function cekPing() {
       const url = "https://www.google.com/favicon.ico"; // File kecil dan cepat

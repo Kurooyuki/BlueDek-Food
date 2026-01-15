@@ -420,6 +420,26 @@ document.getElementById('smartLink').addEventListener('click', async function(e)
   <textarea placeholder="Tulis feedback kamu di sini..." rows="5" style="width: 100%; padding: 10px; border-radius: 6px;"></textarea>
   <br><br>
   <button onclick="saveFeedback()">Kirim</button>
+   <h2>Ingin Produk Mu Tampil Di Website Kami?</h2>
+  <p>Cukup Scan QR Code Dibawah!
+  Untuk endorse produk, kamu akan diarahkan ke Discord. Lihat video panduan di section Endorse jika masih bingung.</p>
+  <img src="assets/frame.png"/>
+  <p>Join Discord Untuk Info Lebih Lanjut.</p>
+  <a href="https://discord.gg/E9WYtq476u">Klik Ini Untuk Join!</a>
+  <h1>Pertanyaan Umum!</h1>
+  <h2>Apa Itu BlueDek Food?</h2>
+  <p>BlueDek Food adalah brand makanan kreatif dengan konsep santai dan ceria.
+  
+Nama “BlueDek” berasal dari dua kata:
+“Blue”, yang melambangkan ketenangan dan kelezatan yang menenangkan seperti laut.
+
+“D.E.K”, singkatan dari “Dine, Enjoy, Keep-smiling” — artinya makan, nikmati, dan tetap tersenyum.
+
+BlueDek Food hadir untuk membawa pengalaman makan yang bukan cuma mengenyangkan, tapi juga bikin bahagia.</p>
+<h2>Apakah Ini Restoran Nyata?</h2>
+<p>Jawaban singkatnya Tidak.</p>
+<h2>Apa Kegunaan Website Ini?</h2>
+<p>Sebenarnya, saya hanya iseng mencoba membuat situs web ini dengan kemampuan coding saya yang tentunya masih sangat kurang. Banyak kode yang berantakan, sehingga tak jarang saya bertanya kepada ChatGPT (Tidak Disponsori).</p>
 </div>
 </section>
 <section id="bluepay">
@@ -867,28 +887,6 @@ function slideRight() {
      <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" class="logo-imgg">
    <a href="https://x.com/Kurooyuki_" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
    </div>
-     <p id="device-info">Mendeteksi perangkat...</p>
-  <script>
-    function detectDevice() {
-      const ua = navigator.userAgent.toLowerCase();
-
-      if (/tablet|ipad/.test(ua)) {
-        return "Tablet";
-      } else if (/mobile|android|iphone|ipod/.test(ua)) {
-        return "HP (Mobile)";
-      } else {
-        return "PC / Laptop";
-      }
-    }
-
-    const device = detectDevice();
-    document.getElementById("device-info").textContent = "Your device: " + device;
-
-    if (device === "HP (Mobile)") {
-      document.querySelector(".mobile-only").style.display = "block";
-    } else {
-      document.querySelector(".desktop-only").style.display = "block";
-    }
   </script>
   <footer>
     <a id="akhir-an" href="https://kurooyuki.github.io/My-Project" target="_blank" rel="noopener noreferrer">Lihat Semua Projek Kami</a>
