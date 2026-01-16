@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="#">
 <meta name="theme-color" content="#2196F3">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlueDek Food</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-<link rel="icon" type="image/png" href="bludek.png">
+<link rel="icon" type="image/png" href="assets/bludek.png">
 </head>
 <div id="loading">
   <div class="spinner"></div>
@@ -445,26 +445,21 @@ BlueDek Food hadir untuk membawa pengalaman makan yang bukan cuma mengenyangkan,
 <section id="bluepay">
   <h2>Saldo BluePay Kamu</h2>
   <p>💰 Rp <span id="bluepay-saldo">0</span></p>
-  <button onclick="showTopUpOptions()">Top Up</button>
-  <div style="text-align:center; padding:50px; font-family:sans-serif">
-  <h4>This feature is not available for America or other countries.</h4>
-  <style>
-.container {
-  display: flex;
-  justify-content: center;   /* tengah horizontal */
-}
+  
+  <div style="margin-bottom: 20px;">
+    <button onclick="showTopUpOptions()">Top Up</button>
+    <button onclick="selectTopUp('Penarikan Tunai')">Penarikan Tunai</button>
+  </div>
 
-.container img {
-  max-width: 90%;            /* biar tidak keluar layar */
-  height: auto;              /* tinggi menyesuaikan (tidak stretch) */
-  aspect-ratio: 16/9;        /* jaga rasio 16:9 */
-  object-fit: contain;       /* biar tetap proporsional */
-  border-radius: 5%;
-}
-</style>
-<div class="container">
-  <img src="assets/20250919_181236." />
-</div>
+  <div style="text-align:center; padding:20px; font-family:sans-serif; width: 100%; box-sizing: border-box;">
+    <h4 style="font-size: 14px;">This feature is not available for America or other countries.</h4>
+    
+    <div class="bluepay-banner-container" style="width: 100%; overflow: hidden; display: flex; justify-content: center;">
+      <img src="assets/errorerrorerrorerrorerrorerror.jpg" 
+           style="max-width: 100%; height: auto; border-radius: 12px; display: block;" 
+           alt="Error Banner" />
+    </div>
+  </div>
 </section>
 <section id="debit-card">
   <button onclick="selectTopUp('Penarikan Tunai')">Penarikan Tunai</button>
