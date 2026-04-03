@@ -155,7 +155,7 @@ function toggleLanguage() {
     document.getElementById("popup-tolo").textContent = "Are you sure you want to log out?";
     document.getElementById("but-ton").textContent = "Cart";
     document.getElementById("pesan-barang").textContent = "Order";
-    document.getElementById("versi-bluedek").textContent = "Version 5.5";
+    document.getElementById("versi-bluedek").textContent = "Version 7.0";
     document.getElementById("order-barang").textContent = "Order Now";
     document.getElementById("deskripsi-home").textContent = "Order your favorite food fast and safely!";
     document.getElementById("deskripsii-home").textContent = "Don't enter your real email just to add excitement like you're actually ordering food online.";
@@ -190,7 +190,7 @@ document.getElementById("order-barang16").textContent = "Order";
   }
   else {
     currentLanguage = "id";
-    langBtn.textContent = "🇮🇩 Bahasa (100%)";
+    langBtn.textContent = "🇮🇩 Indonesia (100%)";
 
     // Ubah kembali ke Indonesia
     document.getElementById("judul-home").textContent = "Selamat Datang di BlueDek Food";
@@ -199,7 +199,7 @@ document.getElementById("order-barang16").textContent = "Order";
     document.getElementById("popup-tolo").textContent = "Apakah kamu yakin ingin logout?";
     document.getElementById("but-ton").textContent = "Keranjang";
     document.getElementById("pesan-barang").textContent = "Pesan";
-    document.getElementById("versi-bluedek").textContent = "Versi 5.5";
+    document.getElementById("versi-bluedek").textContent = "Versi 7.0";
     document.getElementById("order-barang").textContent = "Order Sekarang";
     document.getElementById("deskripsi-home").textContent = "Pesan makanan favoritmu cepat dan aman!";
     document.getElementById("deskripsi-homee").textContent = "Untuk Memesan Makanan Pencet Tombol Menu.";
